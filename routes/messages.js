@@ -107,7 +107,11 @@ module.exports = function (io) {
   });
 
   function getCurrentTime() {
-    let date = new Date();
+    var currentTime = new Date();
+    var currentOffset = currentTime.getTimezoneOffset();
+    var ISTOffset = 330;   // IST offset UTC +5:30 
+    var date = new Date(currentTime.getTime() + (ISTOffset + currentOffset)*60000);
+
     let year = date.getFullYear().toString().split("").splice(0, 2).join("");
     let hours = date.getHours();
     var meridiem = "am";
@@ -271,7 +275,7 @@ module.exports = function (io) {
               sendByMe: false,
             });
         } 
-        else if (
+        if (
           allSockets.getSocketByName(friend) &&
           allSockets.getSocketByName(friend).connected
         ) {
