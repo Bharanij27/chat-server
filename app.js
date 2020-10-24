@@ -12,6 +12,7 @@ var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var messageRouter = require('./routes/messages')(app.io);
 var requestRouter = require('./routes/requests');
+var deleteRouter = require('./routes/deleteMessage');
 
 // // Create the http server 
 // const server = http.createServer(app); 
@@ -37,6 +38,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/messages', messageRouter);
 app.use('/requests', requestRouter);
+app.use('/delete', deleteRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
